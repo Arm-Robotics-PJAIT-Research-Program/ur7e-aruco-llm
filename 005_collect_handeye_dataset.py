@@ -9,7 +9,7 @@ import rtde_control
 # =========================
 # CONFIG
 # =========================
-ROBOT_IP = "10.20.3.26"
+ROBOT_IP = "10.20.3.136"
 CAM_ID = 2
 N_SAMPLES = 25
 

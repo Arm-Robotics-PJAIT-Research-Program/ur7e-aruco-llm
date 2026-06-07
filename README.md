@@ -34,8 +34,8 @@ Run the helper scripts in order before starting the main app:
 
 ```text
 000_find_opencv_camera_id.py
-001_calibrate_camera_charuco.py
-002_generate_charuco_board.py
+001_generate_charuco_board.py
+002_calibrate_camera_charuco.py
 003_test_ur_rtde_connection.py
 004_generate_aruco_marker_sheet.py
 005_collect_handeye_dataset.py

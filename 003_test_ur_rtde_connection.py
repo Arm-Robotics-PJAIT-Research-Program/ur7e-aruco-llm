@@ -3,7 +3,7 @@
 import rtde_control
 import rtde_receive
 
-ROBOT_IP = "10.20.3.26"
+ROBOT_IP = "10.20.3.136"
 
 try:
     print("Connecting to robot...")
