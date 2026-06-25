@@ -20,12 +20,12 @@ WHISPER_BEAM_SIZE = 5
 WHISPER_TARGET_PEAK = 0.85
 WHISPER_INITIAL_PROMPT = (
     "Polish and English vocabulary: krowki PJATK, cukierki, slodycze, candy, "
-    "sweets, snack, treat, dlugopis, dlugopisy, pen, pens, write, notes, "
-    "phone number, signature, karteczki, sentencje, cytat, quote, wisdom, "
+    "sweets, snack, treat, opaska na reke, opaski, wristband, wristbands, "
+    "bracelet, dlugopis, dlugopisy, pen, pens, write, notes, phone number, "
+    "signature, karteczki, sentencje, cytat, quote, wisdom, "
     "motivation, studying, technology, AI, losowy produkt, random product, "
-    "olowek, olowki, pencil, pencils, draw, drawing, sketch, naklejki, stickers, labels, klikacz, klikacze, "
-    "breloczki, opaski na nadgarstek, wristbands, clicker, fidget, keychain, "
-    "stress relief, antystres."
+    "olowek, olowki, pencil, pencils, draw, drawing, sketch, naklejki, stickers, labels, "
+    "klikacz, klikacze, clicker, fidget, stress relief, antystres."
 )
 OLLAMA_MODEL = "qwen2.5:0.5b"
 OLLAMA_BASE_URL = os.getenv("OLLAMA_HOST", "http://localhost:11434")
@@ -119,24 +119,22 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
     ),
     (
         (
-            "dlugopis",
-            "pisac",
-            "zapisac",
-            "zanotowac",
-            "notatki",
-            "podpis",
-            "numer telefonu",
-            "pen",
-            "pens",
-            "write",
-            "writing",
-            "take notes",
-            "note taking",
-            "phone number",
-            "signature",
-            "sign",
+            "opaska",
+            "opaski",
+            "opaska na reke",
+            "opaski na reke",
+            "opaska na nadgarstek",
+            "opaski na nadgarstek",
+            "nadgarstek",
+            "bransoletka",
+            "wristband",
+            "wristbands",
+            "wrist band",
+            "wrist bands",
+            "bracelet",
+            "bracelets",
         ),
-        "dlugopisy pen pens write writing notes phone number signature sign",
+        "opaski na reke wristbands wrist band bracelet",
     ),
     (
         (
@@ -163,6 +161,15 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
         (
             "olowek",
             "olowki",
+            "dlugopis",
+            "dlugopisy",
+            "pisac",
+            "napisac",
+            "zapisac",
+            "zanotowac",
+            "notatki",
+            "podpis",
+            "numer telefonu",
             "rysowac",
             "rysowanie",
             "szkic",
@@ -175,6 +182,16 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
             "random item",
             "pencil",
             "pencils",
+            "pen",
+            "pens",
+            "write",
+            "writing",
+            "write down",
+            "take notes",
+            "note taking",
+            "phone number",
+            "signature",
+            "sign",
             "draw",
             "drawing",
             "sketch",
@@ -182,7 +199,7 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
             "art",
             "design",
         ),
-        "olowki do rysowania pencil pencils random product random item draw drawing sketch art design",
+        "olowki do rysowania pencil pencils pen pens write writing notes phone number signature random product random item draw drawing sketch art design",
     ),
     (
         (
@@ -207,25 +224,12 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
             "klikacz",
             "klikacze",
             "klikac",
-            "breloczek",
-            "breloczki",
-            "opaska",
-            "opaski",
-            "opaska na nadgarstek",
-            "opaski na nadgarstek",
-            "nadgarstek",
             "odstresowac",
             "odstresowujace",
             "antystres",
             "clicker",
             "clickers",
             "fidget",
-            "keychain",
-            "keychains",
-            "wristband",
-            "wristbands",
-            "wrist band",
-            "wrist bands",
             "stress",
             "stress relief",
             "anti stress",
@@ -233,7 +237,7 @@ QUERY_EXPANSIONS: tuple[tuple[tuple[str, ...], str], ...] = (
             "relax",
             "calm down",
         ),
-        "klikacze breloczki opaski na nadgarstek odstresowujace clicker fidget keychain wristband stress relief anti stress toy relax",
+        "klikacze odstresowujace clicker fidget stress relief anti stress toy relax calm down",
     ),
 )
 
@@ -290,49 +294,41 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
     ),
     ContainerDocument(
         id=1,
-        name="Dlugopisy",
+        name="Opaski na reke",
         description=(
-            "Pojemnik z dlugopisami. Dobry wybor, gdy uzytkownik chce cos "
-            "zapisac, zanotowac, podpisac, napisac numer telefonu albo robic notatki. "
-            "Choose this container for pens, writing, note taking, signing or "
-            "writing down a phone number."
+            "Pojemnik z opaskami na reke. Dobry wybor, gdy uzytkownik chce "
+            "opaske, bransoletke, cos na nadgarstek albo pamiatkowa opaske "
+            "z wydarzenia. Choose this container for wristbands, bracelets or "
+            "something to wear on the wrist."
         ),
         keywords=(
-            "dlugopis",
-            "dlugopisy",
-            "pisanie",
-            "pisac",
-            "napisac",
-            "zapisac",
-            "zanotowac",
-            "notatka",
-            "notatki",
-            "podpisac",
-            "telefon",
-            "numer",
-            "pen",
-            "write",
-            "writing",
-            "write down",
-            "note",
-            "notes",
-            "take notes",
-            "note taking",
-            "notebook",
-            "phone",
-            "number",
-            "phone number",
-            "sign",
-            "signature",
-            "autograph",
+            "opaska",
+            "opaski",
+            "opaska na reke",
+            "opaski na reke",
+            "opaska na nadgarstek",
+            "opaski na nadgarstek",
+            "nadgarstek",
+            "reka",
+            "bransoletka",
+            "bransoletki",
+            "pamiatka",
+            "wristband",
+            "wristbands",
+            "wrist band",
+            "wrist bands",
+            "bracelet",
+            "bracelets",
+            "wear",
+            "wrist",
         ),
         examples=(
-            "Chcialbym zapisac sobie numer telefonu.",
-            "Musze cos zanotowac.",
-            "Potrzebuje dlugopisu do podpisu.",
-            "I need to write down a phone number.",
-            "I need a pen.",
-            "I want to take notes.",
+            "Poprosze opaske na reke.",
+            "Chce opaske na nadgarstek.",
+            "Daj mi pamiatkowa opaske.",
+            "I need a wristband.",
+            "Can I get a bracelet?",
+            "I want something to wear on my wrist.",
         ),
     ),
     ContainerDocument(
@@ -394,14 +390,17 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
         id=3,
         name="Olowki do rysowania",
         description=(
-            "Pojemnik z olowkami do rysowania, szkicowania i zaznaczania. "
-            "Dobry wybor, gdy uzytkownik chce rysowac, szkicowac, projektowac "
-            "albo potrzebuje olowka zamiast dlugopisu. Choose this container "
-            "for pencils, drawing, sketching, art or design."
+            "Pojemnik z olowkami do rysowania, szkicowania, zaznaczania i "
+            "zapisywania informacji. Dobry wybor, gdy uzytkownik chce rysowac, "
+            "szkicowac, projektowac, cos zapisac, zanotowac, podpisac albo "
+            "napisac numer telefonu. Choose this container for pencils, drawing, "
+            "sketching, writing, note taking, signing or writing down a phone number."
         ),
         keywords=(
             "olowek",
             "olowki",
+            "dlugopis",
+            "dlugopisy",
             "rysowanie",
             "rysowac",
             "narysowac",
@@ -411,8 +410,20 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
             "projekt",
             "projektowac",
             "zaznaczac",
+            "pisanie",
+            "pisac",
+            "napisac",
+            "zapisac",
+            "zanotowac",
+            "notatka",
+            "notatki",
+            "podpisac",
+            "telefon",
+            "numer",
             "pencil",
             "pencils",
+            "pen",
+            "pens",
             "draw",
             "drawing",
             "sketch",
@@ -421,14 +432,34 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
             "design",
             "designer",
             "draft",
+            "write",
+            "writing",
+            "write down",
+            "note",
+            "notes",
+            "take notes",
+            "note taking",
+            "notebook",
+            "phone",
+            "number",
+            "phone number",
+            "sign",
+            "signature",
+            "autograph",
         ),
         examples=(
             "Chce cos narysowac.",
             "Potrzebuje olowka do szkicu.",
             "Daj mi cos do rysowania.",
+            "Chcialbym zapisac sobie numer telefonu.",
+            "Musze cos zanotowac.",
+            "Potrzebuje czegos do podpisu.",
             "I need a pencil for drawing.",
             "I want to draw something.",
             "I need something for sketching.",
+            "I need to write down a phone number.",
+            "I need a pen.",
+            "I want to take notes.",
         ),
     ),
     ContainerDocument(
@@ -473,43 +504,31 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
     ),
     ContainerDocument(
         id=5,
-        name="Klikacze breloczki i opaski na nadgarstek",
+        name="Klikacze",
         description=(
-            "Pojemnik z klikaczami, breloczkami oraz opaskami na nadgarstek. "
-            "Dobry wybor, gdy uzytkownik chce cos klikac, bawic sie w dloni, "
-            "odstresowac sie, potrzebuje breloczka antystresowego albo opaski "
-            "na nadgarstek. Choose this container for clickers, fidget toys, "
-            "stress relief keychains, wristbands, anti-stress toys or something "
-            "calming to hold."
+            "Pojemnik z klikaczami do odstresowania sie. Dobry wybor, gdy "
+            "uzytkownik chce cos klikac, zajac rece, uspokoic sie, rozladowac "
+            "stres albo potrzebuje malej zabawki antystresowej. Choose this "
+            "container for clickers, fidget toys, stress relief, anti-stress "
+            "toys or something calming to hold."
         ),
         keywords=(
             "klikacz",
             "klikacze",
             "klikac",
-            "breloczek",
-            "breloczki",
-            "opaska",
-            "opaski",
-            "opaska na nadgarstek",
-            "opaski na nadgarstek",
-            "nadgarstek",
             "odstresowujacy",
             "odstresowujace",
+            "odstresowac",
             "stres",
             "antystres",
             "antystresowy",
             "relaks",
+            "uspokoic",
+            "wyciszyc",
             "zabawka",
             "fidget",
             "clicker",
             "clickers",
-            "keychain",
-            "keychains",
-            "wristband",
-            "wristbands",
-            "wrist band",
-            "wrist bands",
-            "bracelet",
             "stress",
             "anti stress",
             "antistress",
@@ -525,11 +544,11 @@ CONTAINER_DOCUMENTS: tuple[ContainerDocument, ...] = (
         examples=(
             "Potrzebuje czegos odstresowujacego.",
             "Daj mi klikacz.",
-            "Chce breloczek antystresowy.",
-            "Poprosze opaske na nadgarstek.",
+            "Chce cos poklikac.",
+            "Potrzebuje czegos, zeby sie uspokoic.",
             "I need a stress relief clicker.",
             "I want a fidget toy.",
-            "I need a wristband.",
+            "I want something to click.",
             "Give me something calming.",
         ),
     ),
@@ -540,8 +559,8 @@ def action_candy() -> None:
     print("[ACTION id=0] Wybrano pojemnik: cukierki krowki PJATK.")
 
 
-def action_pen() -> None:
-    print("[ACTION id=1] Wybrano pojemnik: dlugopisy.")
+def action_wristbands() -> None:
+    print("[ACTION id=1] Wybrano pojemnik: opaski na reke.")
 
 
 def action_quote_cards() -> None:
@@ -557,12 +576,12 @@ def action_stickers() -> None:
 
 
 def action_clickers() -> None:
-    print("[ACTION id=5] Wybrano pojemnik: klikacze, breloczki i opaski na nadgarstek.")
+    print("[ACTION id=5] Wybrano pojemnik: klikacze.")
 
 
 ACTIONS: dict[int, Callable[[], None]] = {
     0: action_candy,
-    1: action_pen,
+    1: action_wristbands,
     2: action_quote_cards,
     3: action_pencil,
     4: action_stickers,
@@ -947,11 +966,11 @@ class ContainerSelector:
             "Allowed answers: 0, 1, 2, 3, 4, 5 or NONE.\n\n"
             "Rules:\n"
             "- ID=0 for candy, fudge, sweets, snacks, treats or something sweet.\n"
-            "- ID=1 for pens, writing, notes, signing or writing down a phone number.\n"
+            "- ID=1 for wristbands, bracelets or something to wear on the wrist.\n"
             "- ID=2 for quote cards, wisdom, sayings, inspiration, motivation, studying, technology or AI.\n"
-            "- ID=3 for pencils, drawing, sketching, art, design, drafting or a random product request.\n"
+            "- ID=3 for pencils, drawing, sketching, art, design, drafting, writing, notes, signing, writing down a phone number or a random product request.\n"
             "- ID=4 for stickers, labels, decals, decorating, marking or tagging.\n"
-            "- ID=5 for clickers, fidget toys, keychains, wristbands, stress relief, anti-stress or relaxing hand toys.\n"
+            "- ID=5 for clickers, fidget toys, stress relief, anti-stress or relaxing hand toys.\n"
             "- If no container matches, answer NONE.\n\n"
             "RAG context:\n"
             "{context}\n\n"
@@ -1270,11 +1289,11 @@ def print_banner() -> None:
     print()
     print("Pojemniki:")
     print("  ID=0 - cukierki krowki PJATK")
-    print("  ID=1 - dlugopisy")
+    print("  ID=1 - opaski na reke")
     print("  ID=2 - karteczki z sentencjami")
-    print("  ID=3 - olowki do rysowania")
+    print("  ID=3 - olowki do rysowania i pisania")
     print("  ID=4 - naklejki")
-    print("  ID=5 - klikacze, breloczki i opaski na nadgarstek")
+    print("  ID=5 - klikacze do odstresowania sie")
     print()
     print("Sterowanie:")
     print("  ENTER - nagraj komende glosowa")

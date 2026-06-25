@@ -10,7 +10,7 @@ from voice_select import VoiceContainerSelector
 
 
 ROBOT_IP = "10.20.3.136"
-CAM_ID = 1
+CAM_ID = 0
 CAMERA_BACKEND = "dshow"
 MARKER_LENGTH = 0.028
 ROBOT_RTDE_PORT = 30004
