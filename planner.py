@@ -48,11 +48,13 @@ class Planner:
 
         # Safe joint poses keep long moves predictable.
         self.home_joints = None
+        self.waypoint_joints = None
         self.transfer_joints = None
         if self.robot is not None:
             try:
                 positions = self.load_positions()
                 self.home_joints = positions["home"]["joints_rad"]
+                self.waypoint_joints = positions["waypoint"]["joints_rad"]
                 self.transfer_joints = positions["transfer"]["joints_rad"]
             except Exception as exc:
                 self.robot_disabled_reason = (
@@ -168,6 +170,13 @@ class Planner:
             return
         print("Moving to TRANSFER joints")
         self.robot.move_j(self.transfer_joints)
+
+    def move_waypoint(self):
+        """Pass through the taught WAYPOINT joint configuration."""
+        if self.robot is None:
+            return
+        print("Moving through WAYPOINT joints")
+        self.robot.move_j(self.waypoint_joints)
 
     def open_gripper(self, reason):
         """Open the gripper and print the current task reason."""
@@ -373,6 +382,9 @@ class Planner:
 
         self.robot.move_l(lift_pose)
 
+        # Pass through a taught waypoint before the final transfer pose.
+        self.move_waypoint()
+
         # Use taught joints for the transfer pose instead of an ad hoc path.
         self.move_transfer()
 
@@ -385,6 +397,9 @@ class Planner:
         self.play_transition_audio_response(marker_id)
 
         time.sleep(self.transfer_wait_s)
+
+        # Return through the taught waypoint before descending at the pick pose.
+        self.move_waypoint()
 
         # Return above the original pick point before descending.
         above_saved_pose = list(saved_pick_pose)

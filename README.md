@@ -50,8 +50,8 @@ These steps create or verify `camera_matrix.npy`, `dist_coeffs.npy`,
 `handeye_dataset.npz`, `handeye_result.npz`, and `robot_positions.json`.
 
 Use `007_teach_robot_positions.py` to record the robot reference poses used by the project.
-Before running it, switch the robot to **Local Control** and enable **Freedrive** manually on the teach pendant. Move the robot by hand to the desired pose, preferably using **Align to Z axis** so the tool orientation is consistent. Then run the script and save the current pose as either `home` or `transfer`.
-`home` is used as the safe starting and return position for robot movements. `transfer` is used as an intermediate waypoint between operations, helping the robot move through a predictable safe pose before going to task-specific positions.
+Before running it, switch the robot to **Local Control** and enable **Freedrive** manually on the teach pendant. Move the robot by hand to the desired pose, preferably using **Align to Z axis** so the tool orientation is consistent. Then run the script and save the current poses as `home`, `waypoint`, and `transfer`.
+`home` is used as the safe starting and return position for robot movements. `waypoint` is used as a pass-through pose after picking and again on the return path, helping the robot move through a predictable safe trajectory. `transfer` is the final handoff/listening pose for the task. The transfer segment runs `lifted pick -> waypoint -> transfer`; the return segment runs `transfer -> waypoint -> above pick position -> saved pick pose`.
 
 After that, run:
 

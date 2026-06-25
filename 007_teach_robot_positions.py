@@ -24,7 +24,9 @@ def main():
     print("Type q to finish.\n")
 
     while True:
-        name = input("Position name (example: home, transfer, camera): ").strip()
+        name = input(
+            "Position name (example: home, waypoint, transfer): "
+        ).strip()
 
         if name.lower() == "q":
             break
