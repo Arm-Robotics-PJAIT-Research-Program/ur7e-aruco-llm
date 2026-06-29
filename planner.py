@@ -65,12 +65,12 @@ class Planner:
 
         # Grip points are expressed in each marker's local coordinate frame.
         self.grip_points_marker = {
-            0: np.array([0.06, 0.03, 0.005]),
-            1: np.array([0.06, 0.03, 0.005]),
-            2: np.array([0.06, 0.03, 0.005]),
-            3: np.array([0.04, 0.03, 0.00]),
-            4: np.array([0.04, 0.03, 0.00]),
-            5: np.array([0.04, 0.03, 0.00]),
+            0: np.array([0.05, 0.04, -0.005]),
+            1: np.array([0.05, 0.04, -0.005]),
+            2: np.array([0.05, 0.04, -0.005]),
+            3: np.array([0.05, 0.04, -0.005]),
+            4: np.array([0.05, 0.04, -0.01]),
+            5: np.array([0.05, 0.04, -0.01]),
         }
         self.grasp_yaw_marker_rad = np.deg2rad(90.0)
 

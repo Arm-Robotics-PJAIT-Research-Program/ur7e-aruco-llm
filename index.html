@@ -359,13 +359,50 @@
             </div>
         </section>
 
+        <script>
+            (() => {
+                const cameraWrap = document.querySelector(".camera-wrap");
+                const cameraFeed = document.querySelector("#camera-feed");
+                const cameraEmpty = document.querySelector(".camera-empty");
+                const streamUrl =
+                    location.protocol === "http:" || location.protocol === "https:"
+                        ? `${location.origin}/camera.mjpg`
+                        : "http://localhost:8766/camera.mjpg";
+                let revealTimer = null;
+
+                function connectCameraFeed() {
+                    cameraEmpty.textContent = "Waiting for camera image";
+                    cameraWrap.classList.remove("camera-ready");
+                    cameraFeed.src = `${streamUrl}?t=${Date.now()}`;
+
+                    // An MJPEG response never finishes, so some browsers do not
+                    // emit an image load event even though frames are being drawn.
+                    revealTimer = setTimeout(() => {
+                        cameraWrap.classList.add("camera-ready");
+                    }, 250);
+                }
+
+                cameraFeed.addEventListener("load", () => {
+                    clearTimeout(revealTimer);
+                    cameraWrap.classList.add("camera-ready");
+                });
+
+                cameraFeed.addEventListener("error", () => {
+                    clearTimeout(revealTimer);
+                    cameraWrap.classList.remove("camera-ready");
+                    cameraEmpty.textContent =
+                        "Cannot connect to the camera stream. Check that main.py is running.";
+                    setTimeout(connectCameraFeed, 1200);
+                });
+
+                connectCameraFeed();
+            })();
+        </script>
+
         <script type="module">
             import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js";
 
             const orbWrap = document.querySelector("#orb-wrap");
-            const cameraWrap = document.querySelector(".camera-wrap");
-            const cameraFeed = document.querySelector("#camera-feed");
-            const cameraEmpty = document.querySelector(".camera-empty");
             const phaseText = document.querySelector("#phase-text");
             const phaseDot = document.querySelector("#phase-dot");
             const message = document.querySelector("#message");
@@ -500,28 +537,6 @@
                 renderer.setSize(width, height, true);
                 orbCamera.aspect = rect.width / Math.max(rect.height, 1);
                 orbCamera.updateProjectionMatrix();
-            }
-
-            function setupCameraFeed() {
-                const streamUrl =
-                    location.protocol === "http:" || location.protocol === "https:"
-                        ? `${location.origin}/camera.mjpg`
-                        : "http://localhost:8766/camera.mjpg";
-
-                cameraFeed.src = `${streamUrl}?t=${Date.now()}`;
-
-                cameraFeed.addEventListener("load", () => {
-                    cameraWrap.classList.add("camera-ready");
-                });
-
-                cameraFeed.addEventListener("error", () => {
-                    cameraWrap.classList.remove("camera-ready");
-                    cameraEmpty.textContent =
-                        "Cannot connect to the camera stream. Check that main.py is running.";
-                    setTimeout(() => {
-                        cameraFeed.src = `${streamUrl}?t=${Date.now()}`;
-                    }, 1200);
-                });
             }
 
             function setSteps(phase) {
@@ -689,7 +704,6 @@
             }
 
             resizeOrb();
-            setupCameraFeed();
             connectSocket();
             animate();
 
